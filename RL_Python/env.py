@@ -9,8 +9,8 @@ else:
 
 
 UNIT = 40   # pixels
-MAZE_H = 4  # grid height
-MAZE_W = 4  # grid width
+MAZE_H = 8  # grid height
+MAZE_W = 8  # grid width
 
 
 class Maze(tk.Tk, object):
@@ -36,7 +36,7 @@ class Maze(tk.Tk, object):
             self.canvas.create_line(x0, y0, x1, y1)
 
         # create origin
-        origin = np.array([20, 20])
+        origin = np.array([60, 60])
 
         # hell
         hell1_center = origin + np.array([UNIT * 2, UNIT])
@@ -45,10 +45,41 @@ class Maze(tk.Tk, object):
             hell1_center[0] + 15, hell1_center[1] + 15,
             fill='black')
         # hell
-        hell2_center = origin + np.array([UNIT, UNIT * 2])
+        hell2_center = origin + np.array([UNIT, UNIT * 3])
         self.hell2 = self.canvas.create_rectangle(
             hell2_center[0] - 15, hell2_center[1] - 15,
             hell2_center[0] + 15, hell2_center[1] + 15,
+            fill='black')
+        
+        hell3_center = origin + np.array([UNIT * 3, UNIT])
+        self.hell3 = self.canvas.create_rectangle(
+            hell3_center[0] - 15, hell3_center[1] - 15,
+            hell3_center[0] + 15, hell3_center[1] + 15,
+            fill='black')
+        
+         
+        hell4_center = origin + np.array([UNIT, UNIT])
+        self.hell4 = self.canvas.create_rectangle(
+            hell4_center[0] - 15, hell4_center[1] - 15,
+            hell4_center[0] + 15, hell4_center[1] + 15,
+            fill='black')
+
+        hell5_center = origin + np.array([UNIT * -1, UNIT])
+        self.hell5 = self.canvas.create_rectangle(
+            hell5_center[0] - 15, hell5_center[1] - 15,
+            hell5_center[0] + 15, hell5_center[1] + 15,
+            fill='black')
+        
+        hell6_center = origin + np.array([UNIT * 3, UNIT * 3])
+        self.hell6 = self.canvas.create_rectangle(
+            hell6_center[0] - 15, hell6_center[1] - 15,
+            hell6_center[0] + 15, hell6_center[1] + 15,
+            fill='black')
+        
+        hell7_center = origin + np.array([UNIT , UNIT * -1])
+        self.hell7 = self.canvas.create_rectangle(
+            hell7_center[0] - 15, hell7_center[1] - 15,
+            hell7_center[0] + 15, hell7_center[1] + 15,
             fill='black')
 
         # create oval
@@ -103,7 +134,10 @@ class Maze(tk.Tk, object):
         if s_ == self.canvas.coords(self.oval):
             reward = 1
             done = True
-        elif s_ in [self.canvas.coords(self.hell1), self.canvas.coords(self.hell2)]:
+        elif s_ in [self.canvas.coords(self.hell1), self.canvas.coords(self.hell2),
+                    self.canvas.coords(self.hell3), self.canvas.coords(self.hell4),
+                    self.canvas.coords(self.hell5), self.canvas.coords(self.hell6),
+                    self.canvas.coords(self.hell7)]:
             reward = -1
             done = True
         else:
